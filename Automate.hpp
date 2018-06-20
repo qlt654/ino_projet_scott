@@ -9,8 +9,8 @@
 #ifndef AUTOMATE_H
 #define AUTOMATE_H
 
-#include "AutomateState.h"
-#include "AutomateStateConcrete.h"
+#include "AutomateState.hpp"
+#include "AutomateStateConcrete.hpp"
 
 
 
@@ -30,7 +30,7 @@ private:
   int green_ ;
   int yellow_ ;
   int red_ ;
-  
+
 
 
 public:

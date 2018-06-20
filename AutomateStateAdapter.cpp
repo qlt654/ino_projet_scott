@@ -1,12 +1,12 @@
 /*
- * 
  *
- * 
- *      
+ *
+ *
+ *
  */
 
-#include "AutomateStateAdapter.h"
-#include "Automate.h"
+#include "AutomateStateAdapter.hpp"
+#include "Automate.hpp"
 
 /*===============================================================
  *------------------------ Constructors -------------------------
@@ -35,4 +35,3 @@ void AutomateStateAdapter::actionExit()  {}
 
 
 void AutomateStateAdapter::transition1() {}
-

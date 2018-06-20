@@ -1,5 +1,5 @@
-#include "AutomateStateConcrete.h"
-#include "Automate.h"
+#include "AutomateStateConcrete.hpp"
+#include "Automate.hpp"
 #include "Arduino.h"
 
 //#include <iostream>

@@ -1,15 +1,15 @@
 
 /*
- * 
  *
- */ 
+ *
+ */
 
 
 
-#ifndef AUTOMATE_STATE_ADAPTER_H 
-#define AUTOMATE_STATE_ADAPTER_H 
+#ifndef AUTOMATE_STATE_ADAPTER_H
+#define AUTOMATE_STATE_ADAPTER_H
 
-#include "AutomateState.h"
+#include "AutomateState.hpp"
 
 
 class AutomateStateAdapter : public AutomateState {
@@ -34,7 +34,7 @@ public:
     virtual void actionEntry() ;
     virtual void actionDo() ;
     virtual void actionExit() ;
-    
+
     virtual void transition1();
 };
 
