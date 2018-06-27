@@ -63,20 +63,9 @@ void Automate::transition(int transition) {
 //    }
 }
 
+void Automate::addTi() {
 
-/*
+}
+void Automate::addTaah() {
 
-
-*/
-
-
-/*
-// implementer l'interface AutomateState pour avoir les transitions ?
-// Nécessité de décider à quel niveau on place la gestion des E/S arduino ?
-// dans le loop{} ou dans l'Automate ?
-// le loop "monitor" les entrées et active de méthode de Automate pressButon1() ...
-// l'appel de ces fonctions change la valeur d'un attribu
-// a chaque appel on vérifie les transitions pouvant être activées
-
-Quelle nom de lib pour utiliser du code arduino hors du .ino ?
-*/
+}

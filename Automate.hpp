@@ -33,6 +33,8 @@ private:
 
 
 
+
+
 public:
 
 //===============================================================
@@ -71,7 +73,8 @@ public:
  *===============================================================*/
     void activateAutomate() ;
     void transition(int transition) ;
-
+    void addTi() ;
+    void addTaah() ;
 };
 
 
