@@ -84,10 +84,34 @@ struct alphab {
   unsigned int hex;
 } ;
 
-alphab alpha[57] {
-{'a' , 0XD},
-{'b' , 0X57},
-{'c' , 0X77}
+
+const alphab alpha[57] {
+{'a' , 0XD  } ,
+{'b' , 0X57 } ,
+{'c' , 0X77 } ,
+{'d' , 0X17 } ,
+{'e' , 0X1  } ,
+{'f' , 0X75 } ,
+{'g' , 0X1F } ,
+{'h' , 0X55 } ,
+{'i' , 0X5  } ,
+{'j' , 0XFD } ,
+{'k' , 0X37 } ,
+{'l' , 0X5D } ,
+{'m' , 0XF  } ,
+{'n' , 0X7  } ,
+{'o' , 0X3F } ,
+{'p' , 0X7D } ,
+{'q' , 0XDF } ,
+{'r' , 0X1D } ,
+{'s' , 0X15 } ,
+{'t' , 0X3  } ,
+{'u' , 0X35 } ,
+{'v' , 0XD5 } ,
+{'w' , 0X3D } ,
+{'x' , 0XD7 } ,
+{'y' , 0XF7 } ,
+{'z' , 0X5F }
 };
 /*
 unsigned int alpha[57][2] = {

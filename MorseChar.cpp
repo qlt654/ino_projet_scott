@@ -29,7 +29,7 @@ int MorseChar::getCharValue() const {
 }
 
 char MorseChar::getCharacter() const {
-  char character = 0 ;
+  char character = '&' ;
 
   int j = 0 ;
   while (j < 57) {

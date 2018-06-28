@@ -11,12 +11,13 @@
 /*===============================================================
  *------------------------ Constructors -------------------------
  *===============================================================*/
-Automate::Automate() {
+Automate::Automate(unsigned short baseTimer) {
   state1_.setAutomate(this) ;
   state2_.setAutomate(this) ;
   state3_.setAutomate(this) ;
-//  this->setCurrentState(&state1_);
   currentState_ = &state1_ ;
+  baseTimer_ = baseTimer ;
+  timeout_ = 0 ;
 }
 
 /*===============================================================
@@ -50,7 +51,8 @@ void Automate::setCurrentState(AutomateState* newState) {
 /*===============================================================
  *--------------------------- Methods ---------------------------
  *===============================================================*/
-void Automate::activateAutomate() {}
+void Automate::activateAutomate() {
+}
 
 void Automate::transition(int transition) {
   if (transition == 1) {
@@ -63,9 +65,22 @@ void Automate::transition(int transition) {
 //    }
 }
 
-void Automate::addTi() {
-
-}
-void Automate::addTaah() {
-
+char Automate::activate(unsigned short howLong) {
+  char lettre = 0 ;
+  if (howLong == 0) {
+    timeout_ = timeout_ + baseTimer_ ;
+  } else if (howLong > 50 && howLong < 150) {
+    charBuffer.addTi() ;
+    timeout_ = 0 ;
+  } else if (howLong > 250 && howLong < 400) {
+    charBuffer.addTaah();
+    timeout_ = 0 ;
+  }
+  if (timeout_ >= 800) {
+//    lettre = charBuffer.getCharacter() ;
+//    charBuffer.resetCharacter();
+    timeout_ = 0 ;
+    lettre = 'w' ;
+  }
+  return lettre ;
 }

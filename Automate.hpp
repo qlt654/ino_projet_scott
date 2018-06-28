@@ -5,15 +5,12 @@
  */
 
 
-
 #ifndef AUTOMATE_H
 #define AUTOMATE_H
 
 #include "AutomateState.hpp"
 #include "AutomateStateConcrete.hpp"
-
-
-
+#include "MorseChar.hpp"
 
 
 class Automate {
@@ -26,13 +23,15 @@ private:
   State2 state2_ ;
   State3 state3_ ;
 
+  MorseChar charBuffer ;
+
+  unsigned short baseTimer_ ;
+  unsigned short timeout_ ;
+
   // Adresses des I/O de la carte utilisées
   int green_ ;
   int yellow_ ;
   int red_ ;
-
-
-
 
 
 public:
@@ -40,11 +39,7 @@ public:
 //===============================================================
 //------------------------ Constructors -------------------------
 //===============================================================
-  Automate() ;
-
-/*===============================================================
- *------------------------- Destructor --------------------------
- *===============================================================*/
+  explicit Automate(unsigned short baseTimer) ;
 
   virtual ~Automate() ;
 
@@ -73,11 +68,9 @@ public:
  *===============================================================*/
     void activateAutomate() ;
     void transition(int transition) ;
-    void addTi() ;
-    void addTaah() ;
+    char activate(unsigned short howLong) ;
+
 };
-
-
 
 
 
