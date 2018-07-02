@@ -11,9 +11,11 @@
 #include "AutomateState.hpp"
 #include "AutomateStateConcrete.hpp"
 #include "MorseChar.hpp"
+#include <stdint.h>
 
 
 class Automate {
+
 
 
 private:
@@ -25,8 +27,9 @@ private:
 
   MorseChar charBuffer ;
 
-  unsigned short baseTimer_ ;
-  unsigned short timeout_ ;
+  uint16_t baseTimer_ ;
+  uint16_t timeout_ ;
+  uint32_t lastActivationTime_ ;
 
   // Adresses des I/O de la carte utilisées
   int green_ ;
@@ -39,7 +42,7 @@ public:
 //===============================================================
 //------------------------ Constructors -------------------------
 //===============================================================
-  explicit Automate(unsigned short baseTimer) ;
+  explicit Automate(uint32_t initTime) ;
 
   virtual ~Automate() ;
 
@@ -68,7 +71,7 @@ public:
  *===============================================================*/
     void activateAutomate() ;
     void transition(int transition) ;
-    char activate(unsigned short howLong) ;
+    char activate(uint16_t howLong, uint32_t currentTime) ;
 
 };
 

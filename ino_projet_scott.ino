@@ -10,13 +10,18 @@ const int RED    = 10 ;
 const int SWITCH =  2 ;
 
 
-unsigned short baseTimer = 10 ;
+uint16_t baseTimer = 10 ;
 Automate automate(baseTimer) ;
-unsigned short temp ;
+uint16_t howLong ;
 char lettre ;
 
+// essais
+uint32_t startTime ;
+uint32_t currentTime ;
 
-int blockingRead (int input) ;
+
+
+uint16_t blockingRead (int input) ;
 
 void setup() {
   // Setting the serial port communication
@@ -33,25 +38,27 @@ void setup() {
   automate.setGreen(GREEN);
   automate.setYellow(YELLOW) ;
   automate.setRed (RED) ;
+  startTime = millis();
+  Serial.println(startTime);
 }
 
 void loop() {
-//  Serial.print("Valeur du bouton : ");
-  temp = blockingRead(SWITCH) ;
-  lettre = automate.activate(temp) ;
-if (lettre != 0) {
-  Serial.println(lettre) ;
-}
+
+//  Serial.println(currentTime) ;
+
+  howLong = blockingRead(SWITCH) ;
+//  Serial.println(howLong) ;
+  lettre = automate.activate(howLong, millis()) ;
+  if (howLong > 10) { Serial.println(howLong);}
+  if (lettre != 0) {
+    Serial.println(lettre);
+  }
   delay(baseTimer);
 }
 
 
-int blockingRead (int input) {
-  int i = 0 ;
-  while (digitalRead(SWITCH) == HIGH) {
-    i++ ;
-//    Serial.println(i);
-    delay(baseTimer) ;
-  }
-  return i ;
+uint16_t blockingRead (int input) {
+  uint32_t startTime = millis() ;
+  while (digitalRead(SWITCH) == HIGH);
+  return (millis() - startTime) ;
 }

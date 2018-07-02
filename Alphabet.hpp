@@ -30,6 +30,9 @@
 #define MASK_4_TI 0X40
 #define MASK_5_TI 0X100
 #define MASK_6_TI 0X400
+
+
+/*
 #define CHAR_A	0XD
 #define CHAR_B	0X57
 #define CHAR_C	0X77
@@ -71,7 +74,7 @@
 #define CHAR_POINT	0XDDD
 #define CHAR_VIRGULE	0XF5F
 #define CHAR_INTEROG	0X5F5
-
+*/
 //#define CHAR_APOSTRO	0
 //#define CHAR_EXCLAMA	0
 //#define CHAR_PAROUVR	0

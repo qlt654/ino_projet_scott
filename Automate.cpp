@@ -11,13 +11,12 @@
 /*===============================================================
  *------------------------ Constructors -------------------------
  *===============================================================*/
-Automate::Automate(unsigned short baseTimer) {
+Automate::Automate(uint32_t initTime) {
   state1_.setAutomate(this) ;
   state2_.setAutomate(this) ;
   state3_.setAutomate(this) ;
   currentState_ = &state1_ ;
-  baseTimer_ = baseTimer ;
-  timeout_ = 0 ;
+  lastActivationTime_ = initTime ;
 }
 
 /*===============================================================
@@ -65,22 +64,23 @@ void Automate::transition(int transition) {
 //    }
 }
 
-char Automate::activate(unsigned short howLong) {
+char Automate::activate(uint16_t howLong, uint32_t currentTime) {
   char lettre = 0 ;
-  if (howLong == 0) {
-    timeout_ = timeout_ + baseTimer_ ;
-  } else if (howLong > 50 && howLong < 150) {
+
+  if (howLong > 500 && howLong < 1500) {
     charBuffer.addTi() ;
     timeout_ = 0 ;
-  } else if (howLong > 250 && howLong < 400) {
+    lastActivationTime_ = currentTime ;
+  } else if (howLong > 2500 && howLong < 4000) {
     charBuffer.addTaah();
     timeout_ = 0 ;
-  }
-  if (timeout_ >= 800) {
-//    lettre = charBuffer.getCharacter() ;
-//    charBuffer.resetCharacter();
-    timeout_ = 0 ;
-    lettre = 'w' ;
+    lastActivationTime_ = currentTime ;
+  } else {
+    if ((currentTime - lastActivationTime_) > 1500) {
+      lettre = charBuffer.getCharacter() ;
+      charBuffer.resetCharacter();
+      lastActivationTime_ = currentTime ;
+    }
   }
   return lettre ;
 }
