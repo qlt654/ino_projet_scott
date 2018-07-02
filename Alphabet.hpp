@@ -117,12 +117,94 @@ const alphab alpha[57] {
 {'z' , 0X5F }
 };
 /*
-unsigned int alpha[57][2] = {
-{'a' , 0XD},
-{'b' , 0X57},
-{'c' , 0X77}
-} ;*/
 
+      switch (character_) {
+
+      case CHAR_A :
+        character = 'A' ;
+        break ;
+      case CHAR_B :
+        character = 'B' ;
+        break ;
+      case CHAR_C :
+        character = 'C' ;
+        break ;
+      case CHAR_D :
+        character = 'D' ;
+        break ;
+      case CHAR_E :
+        character = 'E' ;
+        break ;
+      case CHAR_F :
+        character = 'F' ;
+        break ;
+      case CHAR_G :
+        character = 'G' ;
+        break ;
+      case CHAR_H :
+        character = 'H' ;
+        break ;
+      case CHAR_I :
+        character = 'I' ;
+        break ;
+      case CHAR_J :
+        character = 'J' ;
+        break ;
+      case CHAR_K :
+        character = 'K' ;
+        break ;
+      case CHAR_L :
+        character = 'L' ;
+        break ;
+      case CHAR_M :
+        character = 'M' ;
+        break ;
+      case CHAR_N :
+        character = 'N' ;
+        break ;
+      case CHAR_O :
+        character = 'O' ;
+        break ;
+      case CHAR_P :
+        character = 'P' ;
+        break ;
+      case CHAR_Q :
+        character = 'Q' ;
+        break ;
+      case CHAR_R :
+        character = 'R' ;
+        break ;
+      case CHAR_S :
+        character = 'S' ;
+        break ;
+      case CHAR_T :
+        character = 'T' ;
+        break ;
+      case CHAR_U :
+        character = 'U' ;
+        break ;
+      case CHAR_V :
+        character = 'V' ;
+        break ;
+      case CHAR_W :
+        character = 'W' ;
+        break ;
+      case CHAR_X :
+        character = 'X' ;
+        break ;
+      case CHAR_Y :
+        character = 'Y' ;
+        break ;
+      case CHAR_Z :
+        character = 'Z' ;
+        break ;
+      case CHAR_0 :
+        character = '0' ;
+        break ;
+        default :
+          character = 0 ;
+          break ;
+      }*/
 
 
 

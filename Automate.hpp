@@ -25,7 +25,7 @@ private:
   State2 state2_ ;
   State3 state3_ ;
 
-  MorseChar charBuffer ;
+  MorseChar charBuffer_ ;
 
   uint16_t baseTimer_ ;
   uint16_t timeout_ ;

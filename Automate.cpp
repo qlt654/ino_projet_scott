@@ -66,21 +66,33 @@ void Automate::transition(int transition) {
 
 char Automate::activate(uint16_t howLong, uint32_t currentTime) {
   char lettre = 0 ;
+  if (howLong > 10) {
+    charBuffer_.addBuffer(howLong) ;
+    lastActivationTime_ = currentTime ;
+  } else {
+    if ((currentTime - lastActivationTime_) > 2000) {
+      lettre = charBuffer_.readBuffer() ;
+      lastActivationTime_ = currentTime ;
+    }
+  }
 
+/*
   if (howLong > 500 && howLong < 1500) {
-    charBuffer.addTi() ;
+    charBuffer_.addTi() ;
     timeout_ = 0 ;
     lastActivationTime_ = currentTime ;
   } else if (howLong > 2500 && howLong < 4000) {
-    charBuffer.addTaah();
+    charBuffer_.addTaah();
     timeout_ = 0 ;
     lastActivationTime_ = currentTime ;
   } else {
     if ((currentTime - lastActivationTime_) > 1500) {
-      lettre = charBuffer.getCharacter() ;
-      charBuffer.resetCharacter();
+      lettre = charBuffer_.getCharacter() ;
+      charBuffer_.resetCharacter();
       lastActivationTime_ = currentTime ;
     }
-  }
+  }*/
+
+
   return lettre ;
 }

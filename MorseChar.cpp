@@ -14,9 +14,9 @@
 //------------------------ Constructors -------------------------
 //===============================================================
 MorseChar::MorseChar()  {
-  numberOfAtom_ = 0 ;
-  character_    = 0 ;
+  this->resetCharacter() ;
 }
+
 MorseChar::~MorseChar() {}
 
 
@@ -24,153 +24,28 @@ MorseChar::~MorseChar() {}
 //---------------------- Getters & Setters ----------------------
 //===============================================================
 
-int MorseChar::getCharValue() const {
-  return character_ ;
-}
+int MorseChar::getCharValue() const { return character_ ; }
 
 char MorseChar::getCharacter() const {
   char character = '&' ;
-
   int j = 0 ;
   while (j < 57) {
    if( alpha[j].hex == character_) {
       character = alpha[j].car ;
+      j = 57 ;
     }
     j++ ;
   }
-/* Forum adruino :
-Bonjour,
-Je débute actuellement sur Arduino. Je me suis lancé dans un petit projet pour
-dégripper un peu mes souvenir de CPP et je souhaite en profiter pour tout de suite
-prendre les bons reflexes en terme d'optimisation de la mémoire et du temps de calcul.
-
-Je cherche à faire une fonction qui doit interpréter une valeur numérique (u_int)
-et la comparer à une "base de données" afin d'y récupérer un caractère associé
-un peu comme on pourrait le faire avec une table ASCII si on voulait le faire
-manuellement (par exemple : 'a' = 159).
-
-J'ai resorti deux solutions :
-#1 utiliser un gros renfort de macro puis traverser la liste dans un switch/case :
-#define CHAR_A 159
-switch(code) {
-case CHAR_A :
-caractere = 'a';
-break;
-(...)
-}
-
-#2 définir une structure adaptée et la parcourir avec un while :
-struct maStruct {char caract ; int codeCaract ; }
-maStruct liste[100] {
-  {'a', 159}, .....
-}
-
-while (j < 100) {
-  if(code == liste[j].codeCaract) {caractere = liste[j].caract ;}
-}
-
-
-
-
-
-
-*/
-
-
-/*
-    switch (character_) {
-
-      case CHAR_A :
-        character = 'A' ;
-        break ;
-      case CHAR_B :
-        character = 'B' ;
-        break ;
-      case CHAR_C :
-        character = 'C' ;
-        break ;
-      case CHAR_D :
-        character = 'D' ;
-        break ;
-      case CHAR_E :
-        character = 'E' ;
-        break ;
-      case CHAR_F :
-        character = 'F' ;
-        break ;
-      case CHAR_G :
-        character = 'G' ;
-        break ;
-      case CHAR_H :
-        character = 'H' ;
-        break ;
-      case CHAR_I :
-        character = 'I' ;
-        break ;
-      case CHAR_J :
-        character = 'J' ;
-        break ;
-      case CHAR_K :
-        character = 'K' ;
-        break ;
-      case CHAR_L :
-        character = 'L' ;
-        break ;
-      case CHAR_M :
-        character = 'M' ;
-        break ;
-      case CHAR_N :
-        character = 'N' ;
-        break ;
-      case CHAR_O :
-        character = 'O' ;
-        break ;
-      case CHAR_P :
-        character = 'P' ;
-        break ;
-      case CHAR_Q :
-        character = 'Q' ;
-        break ;
-      case CHAR_R :
-        character = 'R' ;
-        break ;
-      case CHAR_S :
-        character = 'S' ;
-        break ;
-      case CHAR_T :
-        character = 'T' ;
-        break ;
-      case CHAR_U :
-        character = 'U' ;
-        break ;
-      case CHAR_V :
-        character = 'V' ;
-        break ;
-      case CHAR_W :
-        character = 'W' ;
-        break ;
-      case CHAR_X :
-        character = 'X' ;
-        break ;
-      case CHAR_Y :
-        character = 'Y' ;
-        break ;
-      case CHAR_Z :
-        character = 'Z' ;
-        break ;
-      case CHAR_0 :
-        character = '0' ;
-        break ;
-        default :
-          character = 0 ;
-          break ;
-      }*/
   return character ;
 }
 
 void MorseChar::resetCharacter() {
   character_ = 0 ;
-  numberOfAtom_ = 0 ;
+  numberOfAtoms_ = 0 ;
+  numberOfAtomsBuffer_ = 0 ;
+  for (int i = 0 ; i < MAX_NB_OF_ATOM ; i ++) {
+    buffer_[i] = 0 ;
+  }
 }
 
 
@@ -178,6 +53,26 @@ void MorseChar::resetCharacter() {
 //===============================================================
 //--------------------------- Methods ---------------------------
 //===============================================================
+
+void MorseChar::addBuffer(uint16_t howLong) {
+  buffer_[numberOfAtoms_] = howLong ;
+  numberOfAtomsBuffer_ ++ ;
+}
+
+char MorseChar::readBuffer() {
+  char result = 0 ;
+  for (int i = 0 ; i < numberOfAtomsBuffer_ ; i ++) {
+    if (buffer_[i] <= 1.5 * TI_DURATION) {
+      this->addTi();
+    } else if (buffer_[i] > TI_DURATION && buffer_[i] < 1.5 * TAAH_DURATION) {
+      this->addTaah();
+    }
+  }
+  result = this->getCharacter() ;
+  this->resetCharacter();
+  return result ;
+}
+
 
 /*-------------------*
  * EXAMPLE :
@@ -188,7 +83,7 @@ void MorseChar::resetCharacter() {
  *  >>  :        01
  *-------------------*/
 void MorseChar::addTi() {
-  switch (numberOfAtom_) {
+  switch (numberOfAtoms_) {
     case 0 :
       character_ = character_ | MASK_1_TI ;
       break;
@@ -208,14 +103,14 @@ void MorseChar::addTi() {
       character_ = character_ | MASK_6_TI ;
       break;
     default :
-      numberOfAtom_ = 6 ; // pour éviter un overflow a terme avec le ++
+      numberOfAtoms_ = 6 ; // pour éviter un overflow a terme avec le ++
       break;
   }
-  numberOfAtom_++ ;
+  numberOfAtoms_ ++ ;
 }
 
 void MorseChar::addTaah() {
-  switch (numberOfAtom_) {
+  switch (numberOfAtoms_) {
     case 0 :
       character_ = character_ | MASK_1_TA ;
       break;
@@ -236,8 +131,8 @@ void MorseChar::addTaah() {
       break;
     default :
       // lever une erreur
-      numberOfAtom_ = 6 ; // pour éviter un overflow a terme avec le ++
+      numberOfAtoms_ = 6 ; // pour éviter un overflow a terme avec le ++
       break;
   }
-  numberOfAtom_++ ;
+  numberOfAtoms_ ++ ;
 }
