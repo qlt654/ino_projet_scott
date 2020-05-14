@@ -11,9 +11,11 @@
  *------------------------ Constructors -------------------------
  *===============================================================*/
 Automate::Automate() {
+  // patateeeeeeeeeeeeeeeeee attack !
   state1_.setAutomate(this) ;
   state2_.setAutomate(this) ;
-  state3_.setAutomate(this) ;
+//  state3_.setAutomate(this) ;
+  prout.cpp() ;
 //  this->setCurrentState(&state1_);
   currentState_ = &state1_ ;
 }
